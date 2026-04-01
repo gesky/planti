@@ -2,20 +2,21 @@
   "name": "Planti",
   "short_name": "Planti",
   "description": "Conectando profissionais de saúde a contratantes",
-  "start_url": "/index.html",
+  "start_url": "/planti/",
+  "scope": "/planti/",
   "display": "standalone",
   "background_color": "#F9FAFB",
   "theme_color": "#2563EB",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "/planti/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "/planti/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

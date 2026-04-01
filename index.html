@@ -9,19 +9,12 @@
   <meta name="apple-mobile-web-app-title" content="Planti">
   <meta name="theme-color" content="#2563EB">
   <meta name="description" content="Conectando profissionais de saúde a contratantes">
-
   <title>Planti</title>
-
-  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
-
   <style>
-    /* Splash enquanto carrega */
     #splash {
       position: fixed; inset: 0; z-index: 9999;
       background: #fff;
@@ -31,63 +24,66 @@
     }
     #splash.hide { opacity: 0; pointer-events: none; }
     .splash-dot  { width: 16px; height: 16px; background: #2563EB; border-radius: 50%; }
-    .splash-name { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; letter-spacing: -0.5px; }
+    .splash-name { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; letter-spacing: -0.5px; color: #111827; }
   </style>
 </head>
 <body>
 
-<!-- Splash screen -->
 <div id="splash">
   <div class="splash-dot"></div>
   <div class="splash-name">Planti</div>
 </div>
 
-<!-- App shell -->
 <div id="app">
 
   <!-- ══ TELA: Login ══ -->
   <div class="screen" id="screen-login">
-    <div class="screen-body no-nav" style="display:flex;flex-direction:column;justify-content:center;max-width:400px;margin:0 auto;width:100%">
+    <div class="screen-body no-nav" style="display:flex;flex-direction:column;justify-content:center;padding-top:60px">
       <div style="text-align:center;margin-bottom:36px">
         <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px">
-          <div class="logo-dot" style="width:16px;height:16px"></div>
-          <span class="logo-text" style="font-size:28px">Planti</span>
+          <div style="width:16px;height:16px;background:#2563EB;border-radius:50%"></div>
+          <span style="font-family:'Fraunces',serif;font-size:28px;font-weight:600;letter-spacing:-.5px">Planti</span>
         </div>
-        <p style="font-size:14px;color:var(--muted)">Conectando profissionais de saúde</p>
+        <p style="font-size:14px;color:#6B7280">Conectando profissionais de saúde</p>
       </div>
-
       <div class="card">
         <div class="form-group">
           <label for="login-email">E-mail</label>
-          <input type="email" id="login-email" placeholder="seu@email.com">
+          <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email">
         </div>
         <div class="form-group" style="margin-bottom:20px">
           <label for="login-senha">Senha</label>
-          <input type="password" id="login-senha" placeholder="Sua senha">
+          <input type="password" id="login-senha" placeholder="Sua senha" autocomplete="current-password">
         </div>
         <button class="btn btn-primary" id="btn-login">Entrar</button>
-        <p id="login-erro" style="font-size:13px;color:var(--red);margin-top:10px;text-align:center;display:none"></p>
+        <p id="login-erro" style="font-size:13px;color:#DC2626;margin-top:10px;text-align:center;display:none"></p>
       </div>
-
-      <p style="text-align:center;font-size:14px;color:var(--muted);margin-top:20px">
+      <p style="text-align:center;font-size:14px;color:#6B7280;margin-top:20px">
         Não tem conta?
-        <a href="#" id="link-cadastro" style="color:var(--blue);font-weight:500;text-decoration:none">Cadastre-se</a>
+        <a href="#" id="link-cadastro" style="color:#2563EB;font-weight:500;text-decoration:none">Cadastre-se</a>
       </p>
     </div>
   </div>
 
   <!-- ══ TELA: Cadastro ══ -->
-  <!-- Carregado dinamicamente via pages/cadastro.html -->
   <div class="screen hidden-right" id="screen-cadastro">
-    <div id="cadastro-mount"></div>
+    <div class="app-header">
+      <button class="back-btn" id="cadastro-back">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4L6 9l5 5"/></svg>
+        Voltar
+      </button>
+      <span class="header-title">Criar conta</span>
+      <div style="width:60px"></div>
+    </div>
+    <div class="screen-body no-nav" id="cadastro-mount"></div>
   </div>
 
-  <!-- ══ TELA: Home / Busca ══ -->
+  <!-- ══ TELA: Home ══ -->
   <div class="screen hidden-right" id="screen-home">
     <div class="app-header">
-      <div class="header-logo">
-        <div class="logo-dot"></div>
-        <span class="logo-text">Planti</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:12px;height:12px;background:#2563EB;border-radius:50%"></div>
+        <span style="font-family:'Fraunces',serif;font-size:20px;font-weight:600;letter-spacing:-.4px">Planti</span>
       </div>
       <button class="header-action" id="btn-logout" title="Sair">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -99,42 +95,29 @@
   <!-- ══ TELA: Disponibilidades ══ -->
   <div class="screen hidden-right" id="screen-disponibilidade">
     <div class="app-header">
-      <span class="header-title">Disponibilidades</span>
-      <button class="btn btn-primary btn-sm" id="btn-nova-disp" style="width:auto">+ Nova</button>
+      <span class="header-title">Meus plantões</span>
     </div>
-    <div class="screen-body" id="disp-mount"></div>
+    <div class="screen-body" id="disp-mount">
+      <div class="empty-state">
+        <div class="empty-icon">📅</div>
+        <div class="empty-title">Nenhum plantão ainda</div>
+        <div class="empty-text">Publique sua disponibilidade para ser encontrado por contratantes.</div>
+        <button class="btn btn-primary" style="margin-top:8px" onclick="window.__abrirNovaDisp()">+ Nova disponibilidade</button>
+      </div>
+    </div>
   </div>
 
-  <!-- ══ TELA: Chat (lista) ══ -->
+  <!-- ══ TELA: Mensagens ══ -->
   <div class="screen hidden-right" id="screen-chat-list">
     <div class="app-header">
       <span class="header-title">Mensagens</span>
-      <div class="badge badge-blue" id="badge-msgs" style="display:none"></div>
     </div>
-    <div class="screen-body" style="padding:0" id="chat-list-mount"></div>
-  </div>
-
-  <!-- ══ TELA: Chat (conversa) ══ -->
-  <div class="screen hidden-right" id="screen-chat">
-    <div class="app-header">
-      <button class="back-btn" id="chat-back">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4L6 9l5 5"/></svg>
-        Voltar
-      </button>
-      <div id="chat-header-info" style="display:flex;flex-direction:column;align-items:flex-end"></div>
-    </div>
-    <div class="screen-body" style="padding:0;padding-bottom:70px" id="chat-mount"></div>
-    <div id="chat-input-area" style="
-      position:sticky;bottom:0;
-      background:var(--white);border-top:1px solid var(--border);
-      padding:10px 14px calc(10px + var(--safe-bottom));
-      display:flex;gap:8px;align-items:flex-end;
-    ">
-      <textarea id="chat-text" class="chip" style="flex:1;border-radius:22px;padding:10px 14px;font-size:15px;resize:none;height:42px;outline:none;border-width:1.5px"
-        placeholder="Mensagem..."></textarea>
-      <button id="chat-send" class="btn btn-primary btn-icon-only">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      </button>
+    <div class="screen-body" style="padding:0" id="chat-list-mount">
+      <div class="empty-state">
+        <div class="empty-icon">💬</div>
+        <div class="empty-title">Nenhuma conversa ainda</div>
+        <div class="empty-text">As conversas com contratantes aparecerão aqui.</div>
+      </div>
     </div>
   </div>
 
@@ -146,24 +129,18 @@
     <div class="screen-body" id="perfil-mount"></div>
   </div>
 
-  <!-- ══ Bottom Navigation ══ -->
-  <nav class="bottom-nav" id="bottom-nav">
-    <!-- itens injetados pelo JS dependendo do tipo de usuário -->
-  </nav>
+  <!-- ══ Bottom Nav ══ -->
+  <nav class="bottom-nav" id="bottom-nav" style="display:none"></nav>
 
-</div><!-- #app -->
+</div>
 
-<!-- Toast global -->
 <div class="toast" id="toast"></div>
 
-<!-- PWA Service Worker -->
 <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    navigator.serviceWorker.register('sw.js').catch(() => {});
   }
 </script>
-
-<!-- App entry point -->
 <script type="module" src="js/app.js"></script>
 
 </body>
